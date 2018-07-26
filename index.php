@@ -2,7 +2,7 @@
   include "libs/crawler.php";
   include_once "libs/vnexpresscrawler.php";
   include_once "libs/vnnetcrawler.php";
-  include_once "db/connect.php";
+  include_once "db/database.php";
 ?>
 <!DOCTYPE html>
 <html>
@@ -39,7 +39,8 @@
     $inputTitle = $handle->title;
     $inputContent = $handle->content;
     $handle->saveData();
-    echo '<script language="javascript">alert("Thêm dữ liệu thành công!"); window.location="index.php";</script>';
+    
+    /* echo '<script language="javascript">alert("Thêm dữ liệu thành công!"); window.location="index.php";</script>'; */
   } 
 ?>
   <form action="" method="POST">

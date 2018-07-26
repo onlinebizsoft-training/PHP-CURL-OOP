@@ -1,5 +1,5 @@
 <?php
-  include "db/connect.php";
+  include "db/database.php";
   class Crawler{
     public $ch;
     public $url;
@@ -9,6 +9,8 @@
     public $response;
     public $titlePattern;
     public $contentPattern;
+    
+
     function setUrl($link){
       $this->url = $link;
     }
@@ -29,8 +31,13 @@
       }
     }
     public function saveData(){
-      $ins = new DataArr($this->title, $this->content, $this->source);
-      $ins->insertToDB();
+      $db_table_name = 'savedata';
+      $db_fields_name = array('title', 'content', 'link');
+      $values_arr = array($this->title, $this->content, $this->source);
+      $db_fields_name = implode(',', $db_fields_name );
+      $values_arr = implode("','", array_map('htmlspecialchars', $values_arr) );
+      $ins = new MyDatabase();
+      $ins->insertToDB($db_table_name, $db_fields_name, $values_arr);
     }
   }
 ?>
